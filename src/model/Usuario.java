@@ -6,11 +6,10 @@ public class Usuario {
 	private String nombres;
 	private String apellidos;
 	private String fecha_nac;
-	private double tipo_usuario;
+	private String tipo_usuario;
 	
-	public Usuario() {	}
 
-	public Usuario(int id_reg, String nombres, String apellidos, String fecha_nac, double tipo_usuario) {
+	public Usuario(int id_reg, String nombres, String apellidos, String fecha_nac, String tipo_usuario) {
 		super();
 		this.id_reg = id_reg;
 		this.nombres = nombres;
@@ -78,14 +77,14 @@ public class Usuario {
 	/**
 	 * @return the tipo_usuario
 	 */
-	public double getTipo_usuario() {
+	public String getTipo_usuario() {
 		return tipo_usuario;
 	}
 
 	/**
 	 * @param tipo_usuario the tipo_usuario to set
 	 */
-	public void setTipo_usuario(double tipo_usuario) {
+	public void setTipo_usuario(String tipo_usuario) {
 		this.tipo_usuario = tipo_usuario;
 	}
 	
