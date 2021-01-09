@@ -101,5 +101,36 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 		
 	}
+	
+	
+	@Override
+	public Usuario readOne(int id) {
+		
+		Usuario usu = null;
+		
+		try {
+			
+			//establecemos conexión con objeto Singleton
+			Connection c = Conexion.getConnection();
+			//
+			Statement s = c.createStatement();
+			String sql = "select nombres, apellidos, fecha_nac, tipo_usuario from registrarusuario where id_reg=" + id;
+			
+			ResultSet rs = s.executeQuery(sql);
+			
+			while (rs.next()) {
+				//creo una instancia de cliente, le paso los datos del resultset, y lo agrego a la lista.
+				usu = new Usuario(rs.getInt("id_reg"),rs.getString("nombres"), rs.getString("apellidos") , rs.getString("fecha_nac") , rs.getString("tipo_usuario"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Error en método readAll");
+			e.printStackTrace();
+		}
+		
+		return usu;
+		
+		
+	}
 
 }

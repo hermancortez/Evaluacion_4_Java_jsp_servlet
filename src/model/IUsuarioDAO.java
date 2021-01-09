@@ -8,4 +8,5 @@ public interface IUsuarioDAO {
 	public List<Usuario> readAll();	
 	public void updateUsuario(Usuario u);
 	public void deleteUsuario(Usuario u);
+	public Usuario readOne(int id);
 }

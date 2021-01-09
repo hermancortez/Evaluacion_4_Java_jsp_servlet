@@ -1,28 +1,26 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Usuario;
+import model.UsuarioDAO;
+
 /**
- * Servlet implementation class ConexionController
+ * Servlet implementation class UsuarioDetalleController
  */
-@WebServlet("/ConexionController")
-public class ConexionController extends HttpServlet {
+@WebServlet("/UsuarioDetalleController")
+public class UsuarioDetalleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConexionController() {
+    public UsuarioDetalleController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,31 +32,13 @@ public class ConexionController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		try {
-			
-			//validamos qie los drivers esten instalados
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
-			//establecemos la conexion
-			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:curso","herman","123456");
-			
-			//crea objeto estamento
-			Statement st = con.createStatement();
-			
-			//creamos un resulset
-			//ResultSet rs = st.executeQuery("SELECT \"codigosbif\",\"desc_banco\" FROM \"tbl_banco\"");
-			
-			ResultSet rs = st.executeQuery("SELECT NOMBRES,APELLIDOS,FECHA_NAC,TIPO_USUARIO  FROM REGISTRARUSUARIO");
-			
-			while(rs.next()) {
-				System.out.println("USUARIO : " + rs.getString("NOMBRES") + " " + rs.getString("APELLIDOS"));
-			}
-			
-			con.close();
-			
-		}catch(Exception e) {
-			System.out.println(e);
-		}
+		int id = Integer.parseInt(request.getParameter("Id"));
+		
+		UsuarioDAO uDao = new UsuarioDAO();
+		Usuario u = uDao.readOne(id);
+		
+		request.setAttribute("usuario", u);
+		getServletContext().getRequestDispatcher("/views/usuario.jsp").forward(request, response);		
 	}
 
 	/**

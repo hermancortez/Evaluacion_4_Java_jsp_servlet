@@ -20,15 +20,17 @@
 					<th scope="col">Apellidos</th>
 					<th scope="col">Fecha Nacimiento</th>
 					<th scope="col">Tipo de Usuario</th>
+					<th scope="col">Accion</th>
 			</thead>
 			<tbody>
 				<c:forEach var="c" items="${usuario}">
 					<tr>
-						<td><c:out value="${c.getId_reg()}"></c:out></td>
+						<td><a href="d/?id=${c.getId_reg()}"><c:out value="${c.getId_reg()}"></c:out></a></td>
 						<td><c:out value="${c.getNombres()}"></c:out></td>
 						<td><c:out value="${c.getApellidos()}"></c:out></td>
 						<td><c:out value="${c.getFecha_nac()}"></c:out></td>
 						<td><c:out value="${c.getTipo_usuario()}"></c:out></td>
+						<td>Editar | Borrar</td>
 					</tr>
 				</c:forEach>
 			</tbody>
