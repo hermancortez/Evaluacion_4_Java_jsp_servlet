@@ -32,13 +32,13 @@ public class UsuarioDetalleController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		int id = Integer.parseInt(request.getParameter("Id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		
 		UsuarioDAO uDao = new UsuarioDAO();
 		Usuario u = uDao.readOne(id);
 		
 		request.setAttribute("usuario", u);
-		getServletContext().getRequestDispatcher("/views/usuario.jsp").forward(request, response);		
+		getServletContext().getRequestDispatcher("/views/EditarUsuario.jsp").forward(request, response);		
 	}
 
 	/**
@@ -46,7 +46,11 @@ public class UsuarioDetalleController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		Usuario usu = new Usuario(Integer.parseInt(request.getParameter("id")),request.getParameter("nombres"),request.getParameter("apellidos"),request.getParameter("fecha_nac"),request.getParameter("tipo_usuario"));		
+		UsuarioDAO uDao = new UsuarioDAO();		
+		uDao.updateUsuario(usu);								
+		getServletContext().getRequestDispatcher("/views/EditarUsuario.jsp").forward(request, response);	
 	}
 
 }

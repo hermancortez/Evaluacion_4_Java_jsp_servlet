@@ -13,9 +13,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 	@Override
 	public void createUsuario(Usuario u) {
 
-		String sql = "insert into registrausuario (id_reg, nombres, apellidos, fecha_nac, tipo_usuario) values (" + 
-				u.getId_reg() + ", " + u.getNombres() + ", " + u.getApellidos() + 
-				", " + u.getFecha_nac() + ", " + u.getTipo_usuario() + ")";
+		String sql = "insert into registrarusuario (id_reg, nombres, apellidos, fecha_nac, tipo_usuario) values (" + 
+				u.getId_reg() + ", '" + u.getNombres() + "', '" + u.getApellidos() + "', '" + u.getFecha_nac() + "', '" + u.getTipo_usuario() + "')";
+		
+		System.out.println(sql);
 		
 		try {
 			
@@ -25,7 +26,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 			s.execute(sql);
 			
 			s.close();
-			cn.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error en método createUsuario");
@@ -37,32 +37,45 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public List<Usuario> readAll() {
 
 		List<Usuario> lista = new ArrayList<Usuario>();
+		Usuario usu = null;
+		
+		String sql = "select id_reg, nombres, apellidos, fecha_nac, tipo_usuario from registrarusuario";
+		
+		System.out.println(sql);
 		
 		try {
 			
-			Connection c = Conexion.getConnection();
-			Statement s = c.createStatement();
-			String sql = "select id_reg, nombres, apellidos, fecha_nac, tipo_usuario from registrarusuario";
+			Connection cn = Conexion.getConnection();
+			System.out.println("Connection c " + cn);
+			
+			Statement s = cn.createStatement();
+			System.out.println("Statement s " + s);
 			
 			ResultSet rs = s.executeQuery(sql);
+			System.out.println("rs " + rs);
 			
 			while (rs.next()) {
-				
-				lista.add(new Usuario(rs.getInt("id_reg"),rs.getString("nombres"), rs.getString("apellidos") , rs.getString("fecha_nac") , rs.getString("tipo_usuario") ));
+				lista.add(new Usuario(rs.getInt("id_reg"), rs.getString("nombres"), rs.getString("apellidos"), rs.getString("fecha_nac"), rs.getString("tipo_usuario") ));
 			}
 			
+			s.close();
+			
+			
 		} catch (SQLException e) {
-			System.out.println("Error en método readAll");
+			System.out.println("Error en metodo readAll");
 			e.printStackTrace();
 		}
-		
+				
 		return lista;
 	}
 
 	@Override
 	public void updateUsuario(Usuario u) {
 		
-		String sql = "update usuario set (nombres ='" + u.getNombres() + "', apellidos ='" + u.getApellidos() + "', fecha_nac='" + u.getFecha_nac() + "', tipo_usuario=" + u.getTipo_usuario() + ")"; 
+		String sql = "update registrarusuario set nombres ='" + u.getNombres() + "', apellidos ='" + u.getApellidos() + "', "
+				+ "fecha_nac='" + u.getFecha_nac() + "', tipo_usuario='" + u.getTipo_usuario() + "' where id_reg = " + u.getId_reg();
+		
+		System.out.println(sql);
 		
 		try {
 			
@@ -72,7 +85,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 			s.execute(sql);
 			
 			s.close();
-			cn.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error en método updateUsuario");
@@ -82,8 +94,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public void deleteUsuario(Usuario u) {
-		String sql = "delete from registrarusuario where id_reg =" + u.getId_reg(); 
+	public void deleteUsuario(int id) {
+		
+		String sql = "delete from registrarusuario where id_reg =" + id; 
 		
 		try {
 			
@@ -93,7 +106,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			s.execute(sql);
 			
 			s.close();
-			cn.close();
+			//cn.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error en método updateUsuario");
@@ -112,9 +125,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 			//establecemos conexión con objeto Singleton
 			Connection c = Conexion.getConnection();
-			//
 			Statement s = c.createStatement();
-			String sql = "select nombres, apellidos, fecha_nac, tipo_usuario from registrarusuario where id_reg=" + id;
+			String sql = "select id_reg, nombres, apellidos, fecha_nac, tipo_usuario from registrarusuario where id_reg=" + id;
 			
 			ResultSet rs = s.executeQuery(sql);
 			
@@ -123,8 +135,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 				usu = new Usuario(rs.getInt("id_reg"),rs.getString("nombres"), rs.getString("apellidos") , rs.getString("fecha_nac") , rs.getString("tipo_usuario"));
 			}
 			
+			s.close();
+			//c.close();
+						
 		} catch (SQLException e) {
-			System.out.println("Error en método readAll");
+			System.out.println("Error en método readOne");
 			e.printStackTrace();
 		}
 		

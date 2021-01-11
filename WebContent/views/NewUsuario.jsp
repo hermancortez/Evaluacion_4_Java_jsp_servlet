@@ -1,18 +1,16 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Listado de Usuarios</title>
+<title>Nuevo Usuario</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container">
-		<h1>Listado de Usuarios</h1>
-
+		<h1>Crear nuevo Usuario</h1>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
 				<!-- <a class="navbar-brand" href="#">Menú</a>
@@ -35,30 +33,33 @@
 					</ul>
 				</div>
 			</div>
-		</nav>			
-		<table class="table">
-			<thead class="table-dark">
-				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Nombres</th>
-					<th scope="col">Apellidos</th>
-					<th scope="col">Fecha Nacimiento</th>
-					<th scope="col">Tipo de Usuario</th>
-					<th scope="col">Accion</th>
-			</thead>
-			<tbody>
-				<c:forEach var="c" items="${usuario}">
-					<tr>
-						<td><a href="UsuarioDetalleController?id=${c.getId_reg()}"><c:out value="${c.getId_reg()}"></c:out></a></td>
-						<td><c:out value="${c.getNombres()}"></c:out></td>
-						<td><c:out value="${c.getApellidos()}"></c:out></td>
-						<td><c:out value="${c.getFecha_nac()}"></c:out></td>
-						<td><c:out value="${c.getTipo_usuario()}"></c:out></td>
-						<td><a href="UsuarioDetalleController?id=${c.getId_reg()}">Editar </a> | <a href="UsuarioBorrarController?id=${c.getId_reg()}">Borrar</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		</nav>
+		<form action="UsuarioCrearController" method="POST">
+			<div class="mb-3">
+				<label for="id" class="form-label">ID</label> 
+				<input type="number" class="form-control" id="id" name="id" placeholder="numero">
+			</div>
+			<div class="mb-3">
+				<label for="nombres" class="form-label">Nombres</label> 
+				<input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres">
+			</div>
+			<div class="mb-3">
+				<label for="apellidos" class="form-label">Apellidos</label> 
+				<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos">
+			</div>
+			<div class="mb-3">
+				<label for="fecha_nac" class="form-label">Fecha Nacimiento</label> 
+				<input type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="ingrese fecha de nacimiento">
+			</div>
+			<div class="mb-3">
+				<label for="tipo_usuario" class="form-label">Tipo de Usuario</label> 
+				<input type="text" class="form-control" id="tipo_usuario" name="tipo_usuario" placeholder="seleccione el tipo de usuario">
+			</div>			
+			 <div class="col-12">
+    			
+    			<a class="nav-link active" href="UsuarioController"><button type="submit" class="btn btn-primary">Crear</button></a>
+  			</div>
+		</form>
 	</div>
 </body>
 </html>
