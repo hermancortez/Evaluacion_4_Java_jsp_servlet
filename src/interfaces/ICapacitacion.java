@@ -5,7 +5,7 @@ package interfaces;
 
 import java.util.List;
 
-import model.Capacitacion; // Importacion clase Capacitacion
+import modelo.Capacitacion; // Importacion clase Capacitacion
 
 /**
  * @author silva
