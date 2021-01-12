@@ -5,6 +5,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<%
+response.setHeader("Cache-Control", "no-cache");
+response.setHeader("Cache-Control", "no-store");
+response.setHeader("Pragma", "no-cache");
+response.setDateHeader("Expires", 0);
+    %>
+
 <title>Listado de Usuarios</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -29,9 +36,6 @@
 						<li class="nav-item">
 							<a class="nav-link active" href="UsuarioCrearController">Nuevo Usuario</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link active" href="UsuarioDetalleController">Editar Usuario</a>
-						</li>
 					</ul>
 				</div>
 			</div>
@@ -49,12 +53,25 @@
 			<tbody>
 				<c:forEach var="c" items="${usuario}">
 					<tr>
-						<td><a href="UsuarioDetalleController?id=${c.getId_reg()}"><c:out value="${c.getId_reg()}"></c:out></a></td>
+						<td><c:out value="${c.getId_reg()}"></c:out></td>
 						<td><c:out value="${c.getNombres()}"></c:out></td>
 						<td><c:out value="${c.getApellidos()}"></c:out></td>
 						<td><c:out value="${c.getFecha_nac()}"></c:out></td>
 						<td><c:out value="${c.getTipo_usuario()}"></c:out></td>
-						<td><a href="UsuarioDetalleController?id=${c.getId_reg()}">Editar </a> | <a href="UsuarioBorrarController?id=${c.getId_reg()}">Borrar</a></td>
+						
+						      <c:choose>       
+						         <c:when test = "${c.getTipo_usuario() == 'Administrativo'}">
+						            <td><a href="AdministradorDetalleController?id=${c.getId_reg()}">Editar </a> | <a href="UsuarioBorrarController?id=${c.getId_reg()}">Borrar</a></td>
+						         </c:when>
+						         
+						         <c:when test = "${c.getTipo_usuario() == 'Cliente'}">
+						           <td><a href="ClienteDetalleController?id=${c.getId_reg()}">Editar </a> | <a href="UsuarioBorrarController?id=${c.getId_reg()}">Borrar</a></td>
+						         </c:when>
+	
+							     <c:when test = "${c.getTipo_usuario() == 'Profesional'}">
+						            <td><a href="ProfesionalDetalleController?id=${c.getId_reg()}">Editar </a> | <a href="UsuarioBorrarController?id=${c.getId_reg()}">Borrar</a></td>
+						         </c:when>					         
+						      </c:choose>						
 					</tr>
 				</c:forEach>
 			</tbody>

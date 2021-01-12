@@ -29,9 +29,6 @@
 						<li class="nav-item">
 							<a class="nav-link active" href="UsuarioCrearController">Nuevo Usuario</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link active" href="UsuarioDetalleController">Editar Usuario</a>
-						</li>
 					</ul>
 				</div>
 			</div>

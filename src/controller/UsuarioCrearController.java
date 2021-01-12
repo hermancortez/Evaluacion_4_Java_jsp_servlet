@@ -42,11 +42,34 @@ public class UsuarioCrearController extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
-		Usuario usu = new Usuario(Integer.parseInt(request.getParameter("id")),request.getParameter("nombres"),request.getParameter("apellidos"),request.getParameter("fecha_nac"),request.getParameter("tipo_usuario"));
+		String run = "nulo";		
+		String email = "nulo";
+		
+		String area =  "nulo";
+		String fono = "nulo";
+		String titulo = "nulo";
+		String proyecto = "nulo";
+		String afp = "nulo";
+		
+		String sissalud = "nulo";
+		String direccion = "nulo";
+		String comuna = "nulo";
+		int edad = 0;
+
+		
+		
+		
+		
+		Usuario usu = new Usuario(Integer.parseInt(request.getParameter("id")),request.getParameter("nombres"),request.getParameter("apellidos"),request.getParameter("fecha_nac"),request.getParameter("tipo_usuario"),
+				run, email,area , fono, titulo,proyecto, afp, sissalud, direccion, comuna,edad);
+		
+		System.out.println("usu : " + usu);
 		
 		UsuarioDAO uDao = new UsuarioDAO();
-		uDao.createUsuario(usu);
 		
+		System.out.println(" inicio uDao.createUsuario(usu) ");
+		uDao.createUsuario(usu);
+		System.out.println(" fin uDao.createUsuario(usu) ");
 		getServletContext().getRequestDispatcher("/views/NewUsuario.jsp").forward(request, response);	
 	}
 

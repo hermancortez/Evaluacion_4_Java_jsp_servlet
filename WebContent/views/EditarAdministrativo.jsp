@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nuevo Usuario</title>
+<title>Editar Administrativo</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
 	<div class="container">
-		<h1>Crear nuevo Usuario</h1>
+		<h1>Editar Administrativo</h1>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
 				<!-- <a class="navbar-brand" href="#">Menú</a>
@@ -31,35 +31,42 @@
 				</div>
 			</div>
 		</nav>
-		<form action="UsuarioCrearController" method="POST">
+		<form action="AdministradorDetalleController" method="POST">
 			<div class="mb-3">
 				<label for="id" class="form-label">ID</label> 
-				<input type="number" class="form-control" id="id" name="id" placeholder="numero">
+				<input type="number" class="form-control" id="id" name="id" readonly="readonly" placeholder="numero" value="${usuario.getId_reg()}">
 			</div>
 			<div class="mb-3">
 				<label for="nombres" class="form-label">Nombres</label> 
-				<input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres">
+				<input type="hidden" class="form-control" id="nombres" name="nombres" placeholder="Nombres" value="${usuario.getNombres()}">
 			</div>
 			<div class="mb-3">
 				<label for="apellidos" class="form-label">Apellidos</label> 
-				<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos">
+				<input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" value="${usuario.getApellidos()}">
 			</div>
 			<div class="mb-3">
 				<label for="fecha_nac" class="form-label">Fecha Nacimiento</label> 
-				<input type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="ingrese fecha de nacimiento">
+				<input type="text" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Fecha Nacimiento" value="${usuario.getFecha_nac()}">
 			</div>
 			<div class="mb-3">
 				<label for="tipo_usuario" class="form-label">Tipo de Usuario</label> 
-						 <select name="tipo_usuario">
-						 	<option value="sin">Seleccionar</option>
-						    <option value="Administrativo">Administrador</option>
-						    <option value="Cliente">Cliente</option>
-						    <option value="Profesional">Profesional</option>
-						  </select>
-			</div>			
+				<input type="text" class="form-control" id="tipo_usuario" name="tipo_usuario" readonly="readonly" placeholder="Tipo de Usuario" value="${usuario.getTipo_usuario()}">
+			</div>
+			<div class="mb-3">
+				<label for="run" class="form-label">Run</label> 
+				<input type="text" class="form-control" id="run" name="run" placeholder="Ingrese run" value="${usuario.getRun()}">
+			</div>
+			<div class="mb-3">
+				<label for="email" class="form-label">Correo Electronico</label> 
+				<input type="text" class="form-control" id="email" name="email" placeholder="Ingrese Email" value="${usuario.getEmail()}">
+			</div>
+			<div class="mb-3">
+				<label for="area" class="form-label">Area</label> 
+				<input type="text" class="form-control" id="area" name="area" placeholder="Ingrese Area" value="${usuario.getArea()}">
+			</div>				
 			 <div class="col-12">
     			
-    			<a class="nav-link active" href="UsuarioController"><button type="submit" class="btn btn-primary">Crear</button></a>
+    			<a class="nav-link active" href="AdministradorDetalleController"><button type="submit" class="btn btn-primary">Editar</button></a>
   			</div>
 		</form>
 	</div>

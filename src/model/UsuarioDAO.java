@@ -39,7 +39,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		List<Usuario> lista = new ArrayList<Usuario>();
 		Usuario usu = null;
 		
-		String sql = "select id_reg, nombres, apellidos, fecha_nac, tipo_usuario from registrarusuario";
+		String sql = "select id_reg, nombres, apellidos, fecha_nac, tipo_usuario, run,email,area,fono,titulo,proyecto,afp,sissalud,direccion,comuna, edad from registrarusuario";
 		
 		System.out.println(sql);
 		
@@ -55,7 +55,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 			System.out.println("rs " + rs);
 			
 			while (rs.next()) {
-				lista.add(new Usuario(rs.getInt("id_reg"), rs.getString("nombres"), rs.getString("apellidos"), rs.getString("fecha_nac"), rs.getString("tipo_usuario") ));
+				lista.add(new Usuario(rs.getInt("id_reg"), rs.getString("nombres"), rs.getString("apellidos"), rs.getString("fecha_nac"), rs.getString("tipo_usuario"),
+						rs.getString("run"),rs.getString("email"),rs.getString("area"),rs.getString("fono"),rs.getString("titulo"),rs.getString("proyecto"), rs.getString("afp"),
+						rs.getString("sissalud"),rs.getString("direccion"),rs.getString("comuna"), rs.getInt("edad")));
 			}
 			
 			s.close();
@@ -73,7 +75,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public void updateUsuario(Usuario u) {
 		
 		String sql = "update registrarusuario set nombres ='" + u.getNombres() + "', apellidos ='" + u.getApellidos() + "', "
-				+ "fecha_nac='" + u.getFecha_nac() + "', tipo_usuario='" + u.getTipo_usuario() + "' where id_reg = " + u.getId_reg();
+				+ "fecha_nac='" + u.getFecha_nac() + "', tipo_usuario='" + u.getTipo_usuario() + "', run ='" + u.getRun() + "',"
+				+ "email ='" + u.getEmail() + "', area ='" + u.getArea() + "', fono ='" + u.getFono() + "',"
+				+ "titulo ='" + u.getTitulo() + "', proyecto ='" + u.getProyecto() + "', afp ='" + u.getAfp() + "',"
+				+ "sissalud ='" + u.getSissalud() + "', direccion ='" + u.getDireccion() + "', comuna ='" + u.getComuna() + "',"
+				+ " edad ='" + u.getEdad() + "'  where id_reg = " + u.getId_reg();
 		
 		System.out.println(sql);
 		
@@ -126,13 +132,15 @@ public class UsuarioDAO implements IUsuarioDAO {
 			//establecemos conexión con objeto Singleton
 			Connection c = Conexion.getConnection();
 			Statement s = c.createStatement();
-			String sql = "select id_reg, nombres, apellidos, fecha_nac, tipo_usuario from registrarusuario where id_reg=" + id;
+			String sql = "select id_reg, nombres, apellidos, fecha_nac, tipo_usuario, run,email,area,fono,titulo,proyecto,afp,sissalud,direccion,comuna, edad from registrarusuario where id_reg=" + id;
 			
 			ResultSet rs = s.executeQuery(sql);
 			
 			while (rs.next()) {
 				//creo una instancia de cliente, le paso los datos del resultset, y lo agrego a la lista.
-				usu = new Usuario(rs.getInt("id_reg"),rs.getString("nombres"), rs.getString("apellidos") , rs.getString("fecha_nac") , rs.getString("tipo_usuario"));
+				usu = new Usuario(rs.getInt("id_reg"), rs.getString("nombres"), rs.getString("apellidos"), rs.getString("fecha_nac"), rs.getString("tipo_usuario"),
+						rs.getString("run"),rs.getString("email"),rs.getString("area"),rs.getString("fono"),rs.getString("titulo"),rs.getString("proyecto"), rs.getString("afp"),
+						rs.getString("sissalud"),rs.getString("direccion"),rs.getString("comuna"), rs.getInt("edad"));
 			}
 			
 			s.close();

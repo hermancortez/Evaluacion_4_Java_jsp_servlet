@@ -11,16 +11,16 @@ import model.Usuario;
 import model.UsuarioDAO;
 
 /**
- * Servlet implementation class UsuarioDetalleController
+ * Servlet implementation class AdministradorDetalleController
  */
-@WebServlet("/UsuarioDetalleController")
-public class UsuarioDetalleController extends HttpServlet {
+@WebServlet("/AdministradorDetalleController")
+public class AdministradorDetalleController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UsuarioDetalleController() {
+    public AdministradorDetalleController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class UsuarioDetalleController extends HttpServlet {
 		Usuario u = uDao.readOne(id);
 		
 		request.setAttribute("usuario", u);
-		getServletContext().getRequestDispatcher("/views/EditarUsuario.jsp").forward(request, response);		
+		getServletContext().getRequestDispatcher("/views/EditarAdministrativo.jsp").forward(request, response);
 	}
 
 	/**
@@ -46,15 +46,23 @@ public class UsuarioDetalleController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//doGet(request, response);
+		
+		String fono = "nulo";
+		String titulo = "nulo";
+		String proyecto = "nulo";
+		String afp = "nulo";		
+		String sissalud = "nulo";
+		String direccion = "nulo";
+		String comuna = "nulo";
+		int edad = 0;
 		
 		Usuario usu = new Usuario(Integer.parseInt(request.getParameter("id")),request.getParameter("nombres"),request.getParameter("apellidos"),request.getParameter("fecha_nac"),request.getParameter("tipo_usuario"),
-				request.getParameter("run"), request.getParameter("email"), request.getParameter("area") , request.getParameter("fono"), request.getParameter("titulo"),
-				request.getParameter("proyecto"), request.getParameter("afp"), request.getParameter("sissalud"), request.getParameter("direccion"), request.getParameter("comuna"),
-				Integer.parseInt(request.getParameter("edad")));
-		
+				request.getParameter("run"), request.getParameter("email"), request.getParameter("area") ,fono, titulo,
+				proyecto, afp, sissalud, direccion,comuna,edad);		
 		UsuarioDAO uDao = new UsuarioDAO();		
 		uDao.updateUsuario(usu);								
-		getServletContext().getRequestDispatcher("/views/EditarUsuario.jsp").forward(request, response);	
+		getServletContext().getRequestDispatcher("/views/EditarAdministrativo.jsp").forward(request, response);
 	}
 
 }
