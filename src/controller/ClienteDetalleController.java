@@ -38,7 +38,7 @@ public class ClienteDetalleController extends HttpServlet {
 		Usuario u = uDao.readOne(id);
 		
 		request.setAttribute("usuario", u);
-		getServletContext().getRequestDispatcher("/views/EditarCliente.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/UsuarioController").forward(request, response);
 	}
 
 	/**

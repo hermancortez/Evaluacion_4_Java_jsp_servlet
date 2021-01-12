@@ -38,7 +38,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="nombres" class="form-label">Nombres</label> 
-				<input type="hidden" class="form-control" id="nombres" name="nombres" placeholder="Nombres" value="${usuario.getNombres()}">
+				<input type="text" class="form-control" id="nombres" name="nombres" placeholder="Nombres" value="${usuario.getNombres()}">
 			</div>
 			<div class="mb-3">
 				<label for="apellidos" class="form-label">Apellidos</label> 

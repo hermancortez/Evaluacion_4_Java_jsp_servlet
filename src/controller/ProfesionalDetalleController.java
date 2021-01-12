@@ -66,7 +66,7 @@ public class ProfesionalDetalleController extends HttpServlet {
 		
 		UsuarioDAO uDao = new UsuarioDAO();		
 		uDao.updateUsuario(usu);								
-		getServletContext().getRequestDispatcher("/views/EditarProfesional.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/UsuarioController").forward(request, response);
 	}
 
 }

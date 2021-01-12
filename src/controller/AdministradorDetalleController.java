@@ -62,7 +62,7 @@ public class AdministradorDetalleController extends HttpServlet {
 				proyecto, afp, sissalud, direccion,comuna,edad);		
 		UsuarioDAO uDao = new UsuarioDAO();		
 		uDao.updateUsuario(usu);								
-		getServletContext().getRequestDispatcher("/views/EditarAdministrativo.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/UsuarioController").forward(request, response);
 	}
 
 }
