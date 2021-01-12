@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.ICapacitacion;
-import modelo.Capacitacion;
+import model.Capacitacion;
 
 /**
  * @author silva
